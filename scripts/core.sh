@@ -13,10 +13,10 @@
 #   0 if all dependencies are installed
 #   1 if any dependency is missing
 check_dependencies() {
-    if ! command -v upterm &>/dev/null; then
-        tmux display-message "Error: upterm is not installed. Please install it to use this plugin."
-        exit 1
-    fi
+	if ! command -v upterm &>/dev/null; then
+		tmux display-message "Error: upterm is not installed. Please install it to use this plugin."
+		exit 1
+	fi
 }
 
 # Get a tmux option value.
@@ -34,12 +34,12 @@ check_dependencies() {
 # Returns:
 #   0 on success
 tmux_get_option() {
-    local option="$1"
-    local default_value="$2"
-    local option_value
+	local option="$1"
+	local default_value="$2"
+	local option_value
 
-    option_value="$(tmux show-option -gqv "$option")"
-    [[ -n "$option_value" ]] && echo "$option_value" || echo "$default_value"
+	option_value="$(tmux show-option -gqv "$option")"
+	[[ -n "$option_value" ]] && echo "$option_value" || echo "$default_value"
 }
 
 # Set a tmux session option.
@@ -49,11 +49,11 @@ tmux_get_option() {
 #   $2 - The name of the option
 #   $3 - The value of the option
 tmux_set_option_for_session() {
-    local name="$1"
-    local option="$2"
-    local value="$3"
+	local name="$1"
+	local option="$2"
+	local value="$3"
 
-    tmux set -t "$name" "$option" "$value"
+	tmux set -t "$name" "$option" "$value"
 }
 
 # Get a tmux session option value.
@@ -63,8 +63,16 @@ tmux_set_option_for_session() {
 # Outputs:
 #   The option value to stdout
 tmux_get_option_for_session() {
-    local option_name="$1"
-    tmux display-message -p "#{${option_name}}"
+	local option_name="$1"
+	tmux display-message -p "#{${option_name}}"
+}
+
+# Update a tmux environment option value.
+#
+# Arguments:
+#   $1 - The name of the variable to update.
+tmux_update_environment() {
+	tmux set-option -ga update-environment " $1"
 }
 
 # Get the name of the current tmux session.
@@ -72,7 +80,7 @@ tmux_get_option_for_session() {
 # Outputs:
 #   The name of the current session to stdout
 tmux_current_session() {
-    tmux display-message -p '#S'
+	tmux display-message -p '#S'
 }
 
 # Check if a tmux session exists.
@@ -87,7 +95,7 @@ tmux_current_session() {
 #   0 if the session exists
 #   1 if the session does not exist
 tmux_has_session() {
-    tmux list-sessions 2>/dev/null | grep -q "^$1:"
+	tmux list-sessions 2>/dev/null | grep -q "^$1:"
 }
 
 # Create a new tmux session.
@@ -103,7 +111,7 @@ tmux_has_session() {
 # Returns:
 #   0 on success, non-zero on failure
 tmux_new_session() {
-    tmux new-session -ds "$1" -c "$2" "$3"
+	tmux new-session -ds "$1" -c "$2" "$3"
 }
 
 # Switch to a given tmux session.
@@ -117,5 +125,13 @@ tmux_new_session() {
 # Returns:
 #   0 on success, non-zero on failure
 tmux_switch_to() {
-    tmux switch-client -t "$1"
+	tmux switch-client -t "$1"
+}
+
+# Display a message in tmux.
+#
+# Arguments:
+#   $1 - The message to display
+tmux_display_message() {
+	tmux display-message "$1"
 }

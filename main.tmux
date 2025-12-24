@@ -4,8 +4,10 @@ CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=scripts/core.sh
 source "$CURRENT_DIR/core.sh"
 
+[ -z "$DEBUG" ] || set -x
+
 # Set tmux environment option
-tmux set-option -ga update-environment " UPTERM_ADMIN_SOCKET"
+tmux_update_environment "UPTERM_ADMIN_SOCKET"
 
 # Get user-defined key
 upterm_key=$(tmux_get_option "@upterm-key")
