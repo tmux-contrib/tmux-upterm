@@ -114,6 +114,29 @@ tmux_new_session() {
 	tmux new-session -ds "$1" -c "$2" "$3"
 }
 
+# Derive a session name from a directory path.
+#
+# Generates a tmux session name by combining the workspace (parent directory)
+# and project (directory name) with a forward slash, and replacing dots with
+# underscores to ensure tmux compatibility.
+#
+# Globals:
+#   None
+# Arguments:
+#   $1 - The directory path to derive the session name from
+# Returns:
+#   0 on success
+# Outputs:
+#   The generated session name in the format "workspace/project"
+tmux_session_name() {
+	local project workspace
+
+	project=$(basename "$1")
+	workspace=$(basename "$(dirname "$1")")
+
+	echo "$workspace/$project" | tr . _
+}
+
 # Switch to a given tmux session.
 #
 # Switches the current tmux client to the specified session.
