@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+[ -z "$DEBUG" ] || set -x
+
 _tmux_root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=scripts/tmux_core.sh
 source "$_tmux_root_dir/scripts/tmux_core.sh"
 
-[ -z "$DEBUG" ] || set -x
+_check_dependencies
 
 # Set tmux environment option
 _tmux_update_environment "UPTERM_ADMIN_SOCKET"

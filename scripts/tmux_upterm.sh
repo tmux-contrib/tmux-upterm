@@ -6,15 +6,13 @@ _tmux_source_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=tmux_core.sh
 source "$_tmux_source_dir/tmux_core.sh"
 
-_check_dependencies
-
 # Creates or switches to a shared upterm session.
 #
 # This function implements the core logic of the plugin.
 # It checks if the current session is already a shared session.
 # If not, it creates a new shared session named `ssh://<current_session_name>`.
 # If a shared session already exists for the current session, it switches to it.
-tmux_session_share() {
+_tmux_session_share() {
 	local session_name
 	local session_dir_path
 
@@ -44,4 +42,4 @@ tmux_session_share() {
 
 }
 
-tmux_session_share "$@"
+_tmux_session_share "$@"
