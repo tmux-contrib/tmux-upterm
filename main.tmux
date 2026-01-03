@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=scripts/core.sh
-source "$CURRENT_DIR/core.sh"
+_tmux_upterm_root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=scripts/tmux_upterm_core.sh
+source "$_tmux_upterm_root_dir/scripts/tmux_upterm_core.sh"
 
 [ -z "$DEBUG" ] || set -x
 
@@ -17,4 +17,4 @@ if [ -z "$upterm_key" ]; then
 fi
 
 # Bind the key to run the script
-tmux bind-key "$upterm_key" run-shell -b "$CURRENT_DIR/scripts/tmux-upterm.sh"
+tmux bind-key "$upterm_key" run-shell -b "$_tmux_upterm_root_dir/scripts/tmux_upterm.sh"

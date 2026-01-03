@@ -2,9 +2,9 @@
 
 [ -z "$DEBUG" ] || set -x
 
-CURRENT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=scripts/core.sh
-source "$CURRENT_DIR/core.sh"
+_tmux_upterm_source_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=tmux_upterm_core.sh
+source "$_tmux_upterm_source_dir/tmux_upterm_core.sh"
 
 check_dependencies
 
