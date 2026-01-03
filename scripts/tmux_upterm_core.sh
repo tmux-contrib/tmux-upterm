@@ -12,7 +12,7 @@
 # Returns:
 #   0 if all dependencies are installed
 #   1 if any dependency is missing
-check_dependencies() {
+_check_dependencies() {
 	if ! command -v upterm &>/dev/null; then
 		tmux display-message "Error: upterm is not installed. Please install it to use this plugin."
 		exit 1
@@ -33,7 +33,7 @@ check_dependencies() {
 #   The option value or default value to stdout
 # Returns:
 #   0 on success
-tmux_get_option() {
+_tmux_get_option() {
 	local option="$1"
 	local default_value="$2"
 	local option_value
@@ -48,7 +48,7 @@ tmux_get_option() {
 #   $1 - The name of the session
 #   $2 - The name of the option
 #   $3 - The value of the option
-tmux_set_option_for_session() {
+_tmux_set_option_for_session() {
 	local name="$1"
 	local option="$2"
 	local value="$3"
@@ -62,7 +62,7 @@ tmux_set_option_for_session() {
 #   $1 - The name of the session option to retrieve
 # Outputs:
 #   The option value to stdout
-tmux_get_option_for_session() {
+_tmux_get_option_for_session() {
 	local option_name="$1"
 	tmux display-message -p "#{${option_name}}"
 }
@@ -71,7 +71,7 @@ tmux_get_option_for_session() {
 #
 # Arguments:
 #   $1 - The name of the variable to update.
-tmux_update_environment() {
+_tmux_update_environment() {
 	tmux set-option -ga update-environment " $1"
 }
 
@@ -79,7 +79,7 @@ tmux_update_environment() {
 #
 # Outputs:
 #   The name of the current session to stdout
-tmux_current_session() {
+_tmux_current_session() {
 	tmux display-message -p '#S'
 }
 
@@ -94,7 +94,7 @@ tmux_current_session() {
 # Returns:
 #   0 if the session exists
 #   1 if the session does not exist
-tmux_has_session() {
+_tmux_has_session() {
 	tmux list-sessions 2>/dev/null | grep -q "^$1:"
 }
 
@@ -110,7 +110,7 @@ tmux_has_session() {
 #   $3 - The command for the session
 # Returns:
 #   0 on success, non-zero on failure
-tmux_new_session() {
+_tmux_new_session() {
 	tmux new-session -ds "$1" -c "$2" "$3"
 }
 
@@ -128,7 +128,7 @@ tmux_new_session() {
 #   0 on success
 # Outputs:
 #   The generated session name in the format "workspace/project"
-tmux_session_name() {
+_tmux_session_name() {
 	local project workspace
 
 	project=$(basename "$1")
@@ -147,7 +147,7 @@ tmux_session_name() {
 #   $1 - The name of the tmux session to switch to
 # Returns:
 #   0 on success, non-zero on failure
-tmux_switch_to() {
+_tmux_switch_to() {
 	tmux switch-client -t "$1"
 }
 
@@ -155,6 +155,6 @@ tmux_switch_to() {
 #
 # Arguments:
 #   $1 - The message to display
-tmux_display_message() {
+_tmux_display_message() {
 	tmux display-message "$1"
 }

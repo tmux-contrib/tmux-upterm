@@ -7,10 +7,10 @@ source "$_tmux_upterm_root_dir/scripts/tmux_upterm_core.sh"
 [ -z "$DEBUG" ] || set -x
 
 # Set tmux environment option
-tmux_update_environment "UPTERM_ADMIN_SOCKET"
+_tmux_update_environment "UPTERM_ADMIN_SOCKET"
 
 # Get user-defined key
-upterm_key=$(tmux_get_option "@upterm-key")
+upterm_key=$(_tmux_get_option "@upterm-key")
 # OR use default key bind
 if [ -z "$upterm_key" ]; then
 	upterm_key="T"
