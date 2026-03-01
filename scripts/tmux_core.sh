@@ -1,17 +1,9 @@
 #!/usr/bin/env bash
+# tmux_core.sh — shared library; meant to be sourced, not executed directly.
 
-# Check if required dependencies are installed.
+# Check if required dependencies (upterm) are installed
 #
-# Verifies that upterm is installed and available in the system PATH.
-# If any dependency is not found, displays an error message and exits with status 1.
-#
-# Globals:
-#   None
-# Arguments:
-#   None
-# Returns:
-#   0 if all dependencies are installed
-#   1 if any dependency is missing
+# Displays an error via tmux and exits if any dependency is missing.
 _check_dependencies() {
 	if ! command -v upterm &>/dev/null; then
 		tmux display-message "Error: upterm is not installed. Please install it to use this plugin."
@@ -19,115 +11,79 @@ _check_dependencies() {
 	fi
 }
 
-# Get a tmux option value.
+# Get a tmux option with default fallback
 #
-# Retrieves the value of a global tmux option. If the option is not set,
-# returns the provided default value.
-#
-# Globals:
-#   None
 # Arguments:
-#   $1 - The name of the tmux option to retrieve
-#   $2 - The default value to return if the option is not set
+#   $1 - option name
+#   $2 - (optional) default value
 # Outputs:
-#   The option value or default value to stdout
-# Returns:
-#   0 on success
+#   Option value or default
 _tmux_get_option() {
 	local option="$1"
-	local default_value="$2"
-	local option_value
+	local default="${2:-}"
+	local value
 
-	option_value="$(tmux show-option -gqv "$option")"
-	[[ -n "$option_value" ]] && echo "$option_value" || echo "$default_value"
+	value="$(tmux show-option -gqv "$option" 2>/dev/null)"
+	echo "${value:-$default}"
 }
 
-# Set a tmux session option.
+# Set a tmux session option
 #
 # Arguments:
-#   $1 - The name of the session
-#   $2 - The name of the option
-#   $3 - The value of the option
-_tmux_set_option_for_session() {
-	local name="$1"
+#   $1 - session name
+#   $2 - option name
+#   $3 - option value
+_tmux_set_session_option() {
+	local session="$1"
 	local option="$2"
 	local value="$3"
 
-	tmux set -t "$name" "$option" "$value"
+	tmux set-option -t "$session" "$option" "$value"
 }
 
-# Get a tmux session option value.
+# Append a variable to tmux's update-environment list
 #
 # Arguments:
-#   $1 - The name of the session option to retrieve
-# Outputs:
-#   The option value to stdout
-_tmux_get_option_for_session() {
-	local option_name="$1"
-	tmux display-message -p "#{${option_name}}"
-}
-
-# Update a tmux environment option value.
-#
-# Arguments:
-#   $1 - The name of the variable to update.
+#   $1 - variable name
 _tmux_update_environment() {
 	tmux set-option -ga update-environment " $1"
 }
 
-# Get the name of the current tmux session.
+# Get the name of the current tmux session
 #
 # Outputs:
-#   The name of the current session to stdout
+#   Current session name
 _tmux_current_session() {
 	tmux display-message -p '#S'
 }
 
-# Check if a tmux session exists.
+# Check if a tmux session exists
 #
-# Determines whether a tmux session with the given name is currently running.
-#
-# Globals:
-#   None
 # Arguments:
-#   $1 - The name of the tmux session to check
-# Returns:
-#   0 if the session exists
-#   1 if the session does not exist
+#   $1 - session name
 _tmux_has_session() {
-	tmux list-sessions 2>/dev/null | grep -q "^$1:"
+	tmux has-session -t "$1" 2>/dev/null
 }
 
-# Create a new tmux session.
+# Create a new detached tmux session
 #
-# Creates a new detached tmux session with the specified name and working directory.
-#
-# Globals:
-#   None
 # Arguments:
-#   $1 - The name for the new tmux session
-#   $2 - The working directory path for the session
-#   $3 - The command for the session
-# Returns:
-#   0 on success, non-zero on failure
+#   $1 - session name
+#   $2 - working directory path
+#   $3 - (optional) command to run
 _tmux_new_session() {
-	tmux new-session -ds "$1" -c "$2" "$3"
+	tmux new-session -ds "$1" -c "$2" "${3:-}"
 }
 
-# Derive a session name from a directory path.
+# Derive a session name from a directory path
 #
-# Generates a tmux session name by combining the workspace (parent directory)
-# and project (directory name) with a forward slash, and replacing dots with
-# underscores to ensure tmux compatibility.
+# Combines the parent directory (workspace) and basename (project) with a
+# forward slash, replacing dots with underscores for tmux compatibility.
 #
-# Globals:
-#   None
 # Arguments:
-#   $1 - The directory path to derive the session name from
-# Returns:
-#   0 on success
+#   $1 - directory path
 # Outputs:
-#   The generated session name in the format "workspace/project"
+#   Session name in "workspace/project" format
 _tmux_session_name() {
 	local project workspace
 
@@ -137,24 +93,18 @@ _tmux_session_name() {
 	echo "$workspace/$project" | tr . _
 }
 
-# Switch to a given tmux session.
+# Switch to a given tmux session
 #
-# Switches the current tmux client to the specified session.
-#
-# Globals:
-#   None
 # Arguments:
-#   $1 - The name of the tmux session to switch to
-# Returns:
-#   0 on success, non-zero on failure
+#   $1 - session name
 _tmux_switch_to() {
 	tmux switch-client -t "$1"
 }
 
-# Display a message in tmux.
+# Display a message in tmux
 #
 # Arguments:
-#   $1 - The message to display
+#   $1 - message text
 _tmux_display_message() {
 	tmux display-message "$1"
 }
