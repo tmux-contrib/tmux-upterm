@@ -1,6 +1,6 @@
 # tmux-upterm
 
-A `tmux` plugin for sharing sessions via [upterm](https://upterm.dev).
+Share your tmux sessions securely over the internet with [Upterm](https://upterm.dev) — perfect for pair programming and remote collaboration.
 
 ## Dependencies
 
