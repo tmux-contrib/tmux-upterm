@@ -24,11 +24,11 @@ And install it by running `<prefix> + I`.
 | ---------------------------------------- | ------------------------------------ |
 | <kbd>Prefix</kbd> + <kbd>T</kbd>         | Create or switch to an upterm session |
 
-This plugin provides a flag, `@is_upterm_session`, that is set to `true` for any
+This plugin provides a flag, `@upterm-session`, that is set to `true` for any
 session created by this plugin. You can use this flag in your tmux status line:
 
 ```tmux
-set -g status-right '#{?@is_upterm_session,[upterm],}'
+set -g status-right '#{?@upterm-session,[upterm],}'
 ```
 
 ## Configuration

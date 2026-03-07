@@ -38,7 +38,7 @@ _tmux_session_share() {
 			_tmux_new_session "$session_name" "$session_dir_path" "upterm host --accept --force-command 'tmux attach -t $session_name'"
 
 			# Set the indicator flag
-			_tmux_set_session_option "$session_name" "@is_upterm_session" "true"
+			_tmux_set_session_option "$session_name" "@upterm-session" "true"
 		fi
 
 		# Switch to the new session
