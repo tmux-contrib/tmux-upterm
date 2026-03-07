@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/tmux-contrib/tmux-upterm/compare/v0.2.0...v0.2.1) (2026-03-07)
+
+
+### Reverts
+
+* restore [@upterm-session](https://github.com/upterm-session) as a plain boolean flag ([d9cd5e9](https://github.com/tmux-contrib/tmux-upterm/commit/d9cd5e9d4115f92df49b0f4c0d000946d791f6fe))
+
 ## [0.2.0](https://github.com/tmux-contrib/tmux-upterm/compare/v0.1.0...v0.2.0) (2026-03-01)
 
 
