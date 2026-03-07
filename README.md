@@ -24,15 +24,11 @@ And install it by running `<prefix> + I`.
 | ---------------------------------------- | ------------------------------------ |
 | <kbd>Prefix</kbd> + <kbd>T</kbd>         | Create or switch to an upterm session |
 
-This plugin sets `@upterm-session` to the session name for any session created
-by this plugin. Use it as a boolean check or display the name directly:
+This plugin sets `@upterm-session` to `true` for any session created by this
+plugin. Use it as a boolean flag in your tmux status line:
 
 ```tmux
-# Boolean check
 set -g status-right '#{?@upterm-session,[upterm],}'
-
-# Show the actual session name
-set -g status-right '#{?@upterm-session,[upterm: #{@upterm-session}],}'
 ```
 
 ## Configuration
