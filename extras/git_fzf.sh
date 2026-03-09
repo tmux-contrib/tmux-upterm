@@ -7,13 +7,12 @@
 # Keybinds added:
 #
 #   git fzf repo  (GIT_FZF_REPO_OPTS)
-#     alt-u     Open an upterm session for the selected repository
+#     alt-T     Open an upterm session for the selected repository
 #
-#   git fzf worktree
-#     alt-U     Open an upterm session for the selected worktree
+#   git fzf worktree  (GIT_FZF_WORKTREE_OPTS)
+#     alt-T     Open an upterm session for the selected worktree
 
-_git_fzf_upterm_dir=$(dirname "${BASH_SOURCE[0]:-$0}")
-[[ "$_git_fzf_upterm_dir" = /* ]] || _git_fzf_upterm_dir="$(cd "$_git_fzf_upterm_dir/.." && pwd)"
+_git_fzf_upterm_dir="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")/.." && pwd)"
 
 _git_fzf_upterm_cmd="$_git_fzf_upterm_dir/scripts/tmux_upterm.sh"
 
