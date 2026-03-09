@@ -24,7 +24,7 @@ fi
 
 if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
 	_git_fzf_repo_opts=(
-		"--bind=alt-u:execute-silent(${_git_fzf_upterm_cmd} {1})+abort"
+		"--bind=alt-T:execute-silent(${_git_fzf_upterm_cmd} {1})+abort"
 	)
 	GIT_FZF_REPO_OPTS+="${GIT_FZF_REPO_OPTS:+ }$(printf '%q ' "${_git_fzf_repo_opts[@]}")"
 	GIT_FZF_REPO_OPTS="${GIT_FZF_REPO_OPTS% }"
@@ -34,7 +34,7 @@ fi
 
 if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
 	_git_fzf_worktree_opts=(
-		"--bind=alt-u:execute-silent(${_git_fzf_upterm_cmd} {1})+abort"
+		"--bind=alt-T:execute-silent(${_git_fzf_upterm_cmd} {1})+abort"
 	)
 	GIT_FZF_WORKTREE_OPTS+="${GIT_FZF_WORKTREE_OPTS:+ }$(printf '%q ' "${_git_fzf_worktree_opts[@]}")"
 	GIT_FZF_WORKTREE_OPTS="${GIT_FZF_WORKTREE_OPTS% }"
