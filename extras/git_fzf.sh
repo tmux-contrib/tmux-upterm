@@ -13,9 +13,9 @@
 #     alt-U     Open an upterm session for the selected worktree
 
 _git_fzf_upterm_dir=$(dirname "${BASH_SOURCE[0]:-$0}")
-[[ "$_git_fzf_upterm_dir" = /* ]] || _git_fzf_upterm_dir="$(cd "$_git_fzf_upterm_dir" && pwd)"
+[[ "$_git_fzf_upterm_dir" = /* ]] || _git_fzf_upterm_dir="$(cd "$_git_fzf_upterm_dir/.." && pwd)"
 
-_git_fzf_upterm_cmd="$_git_fzf_upterm_dir/../tmux_upterm.sh"
+_git_fzf_upterm_cmd="$_git_fzf_upterm_dir/scripts/tmux_upterm.sh"
 
 _git_fzf_upterm_use=0
 if [[ -n "${TMUX:-}" ]]; then
