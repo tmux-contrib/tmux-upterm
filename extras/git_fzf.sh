@@ -6,7 +6,7 @@
 #
 # Keybinds added:
 #
-#   git fzf repo
+#   git fzf repo  (GIT_FZF_REPO_OPTS)
 #     alt-u     Open an upterm session for the selected repository
 #
 #   git fzf worktree
@@ -23,13 +23,13 @@ if [[ -n "${TMUX:-}" ]]; then
 fi
 
 if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
-	_git_fzf_repository_opts=(
+	_git_fzf_repo_opts=(
 		"--bind=alt-u:execute-silent(${_git_fzf_upterm_cmd} {1})+abort"
 	)
-	GIT_FZF_REPOSITORY_OPTS+="${GIT_FZF_REPOSITORY_OPTS:+ }$(printf '%q ' "${_git_fzf_repository_opts[@]}")"
-	GIT_FZF_REPOSITORY_OPTS="${GIT_FZF_REPOSITORY_OPTS% }"
-	export GIT_FZF_REPOSITORY_OPTS
-	unset _git_fzf_repository_opts
+	GIT_FZF_REPO_OPTS+="${GIT_FZF_REPO_OPTS:+ }$(printf '%q ' "${_git_fzf_repo_opts[@]}")"
+	GIT_FZF_REPO_OPTS="${GIT_FZF_REPO_OPTS% }"
+	export GIT_FZF_REPO_OPTS
+	unset _git_fzf_repo_opts
 fi
 
 if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
