@@ -28,6 +28,7 @@ if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
 	GIT_FZF_REPO_OPTS+="${GIT_FZF_REPO_OPTS:+ }$(printf '%q ' "${_git_fzf_repo_opts[@]}")"
 	GIT_FZF_REPO_OPTS="${GIT_FZF_REPO_OPTS% }"
 	export GIT_FZF_REPO_OPTS
+	tmux set-environment -g GIT_FZF_REPO_OPTS "$GIT_FZF_REPO_OPTS"
 	unset _git_fzf_repo_opts
 fi
 
@@ -38,6 +39,7 @@ if [[ "$_git_fzf_upterm_use" -eq 1 ]]; then
 	GIT_FZF_WORKTREE_OPTS+="${GIT_FZF_WORKTREE_OPTS:+ }$(printf '%q ' "${_git_fzf_worktree_opts[@]}")"
 	GIT_FZF_WORKTREE_OPTS="${GIT_FZF_WORKTREE_OPTS% }"
 	export GIT_FZF_WORKTREE_OPTS
+	tmux set-environment -g GIT_FZF_WORKTREE_OPTS "$GIT_FZF_WORKTREE_OPTS"
 	unset _git_fzf_worktree_opts
 fi
 
