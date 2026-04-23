@@ -2,7 +2,7 @@
 
 > Share your tmux sessions securely over the internet with [Upterm](https://upterm.dev) — perfect for pair programming and remote collaboration.
 
-[![Test](https://github.com/tmux-contrib/tmux-upterm/actions/workflows/test.yml/badge.svg)](https://github.com/tmux-contrib/tmux-upterm/actions/workflows/test.yml) [![Release](https://img.shields.io/github/v/release/tmux-contrib/tmux-upterm)](https://github.com/tmux-contrib/tmux-upterm/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![CI](https://github.com/tmux-contrib/tmux-upterm/actions/workflows/ci.yml/badge.svg)](https://github.com/tmux-contrib/tmux-upterm/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/tmux-contrib/tmux-upterm)](https://github.com/tmux-contrib/tmux-upterm/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Dependencies
 
