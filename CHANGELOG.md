@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/tmux-contrib/tmux-upterm/compare/v0.3.0...v0.3.1) (2026-04-23)
+
+
+### Bug Fixes
+
+* add postCreateCommand to restore nix volume permissions ([7f6967f](https://github.com/tmux-contrib/tmux-upterm/commit/7f6967f323d5ac8606812ca086ceced9d2f79c97))
+
 ## [0.3.0](https://github.com/tmux-contrib/tmux-upterm/compare/v0.2.0...v0.3.0) (2026-03-11)
 
 
