@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.2](https://github.com/tmux-contrib/tmux-upterm/compare/v0.3.1...v0.3.2) (2026-05-11)
+
+
+### Bug Fixes
+
+* **github:** correct action versions in update.yml ([9be5ea9](https://github.com/tmux-contrib/tmux-upterm/commit/9be5ea91cfb916a16cf024fcd166f82c96f50d0f))
+
 ## [0.3.1](https://github.com/tmux-contrib/tmux-upterm/compare/v0.3.0...v0.3.1) (2026-04-23)
 
 
